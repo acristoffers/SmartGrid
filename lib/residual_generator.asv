@@ -62,6 +62,12 @@ function [generator] = residual_generator(A, B, C, F, Li, l)
     H = R * B;
     D = eye(dim);
 
+    Q = -(C*(1-Li))' * pinv(eye(size(C, 1)) - C*pinv(F*E));
+    M = -(C*(1-Li))';
+    G = −Q*C*pinv(F);
+    disp(Q);
+    
+    
     cvx_begin quiet
         variable Q(1, size(C,1))
         variable l
